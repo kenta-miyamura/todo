@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import test from '../js/pages/test.vue'
+import NotFound from './pages/errors/NotFound.vue'
+
+import Test from '../js/pages/test.vue'
+import Posts from '../js/pages/posts/index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: test
+    component: Test
+  },
+  {
+    path: '/posts',
+    component: Posts
+  },
+  // 404
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 
