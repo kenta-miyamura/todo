@@ -27,6 +27,11 @@
   <body>
     <div id="app"></div>
   </body>
+  <script>
+    window.Laravel = {!! json_encode([
+        'apiToken' => \Auth::user()->api_token ?? null
+    ]) !!};
+  </script>
   <script src="{{ mix('js/app.js') }}"></script>
 
   <!-- JQuery -->

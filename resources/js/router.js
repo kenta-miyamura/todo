@@ -5,6 +5,7 @@ import NotFound from './pages/errors/NotFound.vue'
 
 import Test from '../js/pages/test.vue'
 import Posts from '../js/pages/posts/index.vue'
+import Login from '../js/pages/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,10 @@ const routes = [
   {
     path: '/posts',
     component: Posts
+  },
+  {
+    path: '/login',
+    component: Login
   },
   // 404
   {
