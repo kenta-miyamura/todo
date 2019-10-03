@@ -21,7 +21,11 @@
         <span
           v-if="post.comments.length > 0"
           class="badge badge-primary">
-            コメント {{ post.comments.length }}件
+            <router-link
+            :to="`/posts/${post.id}`"
+            class="text-white">
+              コメント {{ post.comments.length }}件
+            </router-link>
         </span>
       </div>
     </div>
@@ -32,7 +36,7 @@
 import { postRepository } from '../../repositories/PostRepository'
 export default {
   data: () => ({
-    posts: {}
+    posts: []
   }),
 
   async mounted () {

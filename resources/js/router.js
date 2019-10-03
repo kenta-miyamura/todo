@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import NotFound from './pages/errors/NotFound.vue'
 
 import Test from '../js/pages/test.vue'
-import Posts from '../js/pages/posts/index.vue'
+import PostsList from '../js/pages/posts/index.vue'
+import PostsDetail from '../js/pages/posts/detail.vue'
 import Login from '../js/pages/Login.vue'
 
 Vue.use(VueRouter)
@@ -16,7 +17,11 @@ const routes = [
   },
   {
     path: '/posts',
-    component: Posts
+    component: PostsList
+  },
+  {
+    path: '/posts/:id',
+    component: PostsDetail
   },
   {
     path: '/login',
@@ -24,7 +29,7 @@ const routes = [
   },
   // 404
   {
-    path: '*',
+    path: '/notFound',
     component: NotFound
   }
 ]
