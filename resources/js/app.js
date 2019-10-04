@@ -1,6 +1,6 @@
 import './bootstrap'
 import Vue from 'vue'
-import router from './router.js'
+import router from './router'
 import App from './App.vue'
 
 require('./bootstrap')
@@ -10,7 +10,7 @@ const createApp = async () => {
     el: '#app',
     router,
     components: { App },
-    template: '<App />'
+    template: '<App />',
   })
 }
 

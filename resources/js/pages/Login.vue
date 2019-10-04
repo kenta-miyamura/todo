@@ -38,24 +38,23 @@
 </template>
 
 <script>
-import { authRepository } from '../repositories/AuthRepository'
+import authRepository from '../repositories/AuthRepository'
 
 export default {
   data: () => ({
     loginForm: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   }),
   methods: {
-    async login () {
-      console.log(this.loginForm)
+    async login() {
       const response = await authRepository.login(this.loginForm)
 
       if (response.status === 200) {
         this.$router.push('/')
       }
-    }
-  }
+    },
+  },
 }
 </script>

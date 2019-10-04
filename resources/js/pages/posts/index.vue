@@ -33,15 +33,16 @@
 </template>
 
 <script>
-import { postRepository } from '../../repositories/PostRepository'
+import postRepository from '../../repositories/PostRepository'
+
 export default {
   data: () => ({
-    posts: []
+    posts: [],
   }),
 
-  async mounted () {
+  async mounted() {
     const response = await postRepository.index()
     this.posts = response.data
-  }
+  },
 }
 </script>

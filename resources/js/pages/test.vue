@@ -9,17 +9,17 @@
 </template>
 
 <script>
-import { authRepository } from '../repositories/AuthRepository'
+import authRepository from '../repositories/AuthRepository'
 
 export default {
   methods: {
-    async logout () {
+    async logout() {
       const response = await authRepository.logout()
 
       if (response.status === 200) {
         this.$router.push('/login')
       }
-    }
-  }
+    },
+  },
 }
 </script>

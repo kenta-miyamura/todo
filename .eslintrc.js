@@ -24,6 +24,10 @@ module.exports = {
     "semi-style": ["error", "first"],
     "no-extra-semi": "error",
     "no-unexpected-multiline": "error",
-    "no-unreachable": "error"
+    "no-unreachable": "error",
+    'import/no-extraneous-dependencies': ['error', {
+      devDependencies: true,
+      optionalDependencies: false,
+    }]
   },
 };
