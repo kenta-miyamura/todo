@@ -1,26 +1,29 @@
 module.exports = {
-  root: true,
-  globals: {
-    '_': true, // lodash
-    'Enumerable': true // linq
-  },
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   env: {
     browser: true,
+    es6: true,
   },
   extends: [
-    'standard', // https://github.com/standard/standard/blob/master/docs/RULES-en.md,
-    'plugin:vue/essential'
+    'plugin:vue/essential',
+    'airbnb-base',
   ],
-  // required to lint *.vue files
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
   plugins: [
-    'vue'
+    'vue',
   ],
-  // add your custom rules here
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off'
-  }
-}
+    "semi": ["error", "never", {"beforeStatementContinuationChars": "never"}],
+    "semi-spacing": ["error", {"after": true, "before": false}],
+    "semi-style": ["error", "first"],
+    "no-extra-semi": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error"
+  },
+};
