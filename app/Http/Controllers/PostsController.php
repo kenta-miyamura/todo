@@ -21,17 +21,10 @@ class PostsController extends Controller
 
     public function show(int $id)
     {
-        $posts = $this->post->with('comments')
+        return $this->post->with('comments')
             ->where('id', $id)
             ->orderBy('created_at', 'desc')
-            ->first();
-
-        // todo response->jsonの第二引数でstatus_codeを指定してもvue側で受け取れない
-        if (is_null($posts)) {
-            return response()->json(['status' => 404]);
-        }
-
-        return $posts;
+            ->firstOrFail();
     }
 
     public function store(Request $request)
