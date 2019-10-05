@@ -46,6 +46,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        // todo Exceptionのreturnをjsonに変化させるが要検討
+        // レスポンスをJSON形式に変更
+        if ($request->is('ajax/*') || $request->is('api/*') || $request->ajax()) {
+            $status = 400;
+            if ($this->isHttpException($exception)) {
+                $status = $exception->getStatusCode();
+            }
+            return response()->json([
+                'status' => $status,
+                // 'errors' => $this->getMessage($status)
+            ]);
+        } else {
+            return parent::render($request, $exception);
+        }
     }
 }
