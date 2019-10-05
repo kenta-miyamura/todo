@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
     Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store']]);
 // });
 
-Route::group(['middleware' => 'api'], function() {
+Route::group(['middleware' => 'api'], function () {
     Route::post('/auth/login', 'AuthContoller@login');
     Route::post('/auth/logout', 'AuthContoller@logout');
-    Route::resource('posts', 'PostsController', ['only' => ['index', 'show', 'create', 'store']]);
-
+    Route::resource('posts', 'PostsController');
 });

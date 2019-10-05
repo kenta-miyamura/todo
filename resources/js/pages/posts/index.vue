@@ -12,8 +12,8 @@
         <p>新しい記事を作成する</p>
       </template>
       <template slot="body">
-        <div class="form-group row">
-          <label for="title" class="col-sm-2 col-form-label">スレタイトル</label>
+        <div class="form-group">
+          <label for="title" class="col-sm-2 col-form-label">タイトル</label>
           <div class="col-sm-10">
             <input
               v-model="inputForm.title"
@@ -25,6 +25,17 @@
             >
           </div>
         </div>
+        <div class="form-group">
+          <label for="body" class="col-sm-2 col-form-label">内容</label>
+          <div class="col-sm-10">
+            <textarea
+              v-model="inputForm.body"
+              id="body"
+              class="form-control"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
       </template>
     </Modal>
     <Modal
@@ -32,6 +43,21 @@
       @post="onPost"
       @cancel="onCloseConfirmModal"
     >
+    </Modal>
+    <Modal
+      v-if="showCompleteModal"
+    >
+      <template slot="header">
+        処理が完了しました
+      </template>
+      <template slot="body">
+        {{ completeMesagge }}
+      </template>
+      <template slot="footer">
+        <button class="btn btn-danger" @click="onCloseAllModal">
+          閉じる
+        </button>
+      </template>
     </Modal>
     <div
       v-for="(post, index) in posts"
@@ -78,10 +104,11 @@ export default {
     posts: [],
     inputForm: {
       title: '',
+      body: '',
     },
-    message: '',
     showModal: false,
-    showConfirmModal: true,
+    showConfirmModal: false,
+    showCompleteModal: false,
   }),
 
   async mounted() {
@@ -89,6 +116,7 @@ export default {
     this.posts = response.data
   },
   methods: {
+    // todo modal周りをもっと簡素にしたい！！！
     onOpenModal() {
       this.showModal = true
     },
@@ -101,8 +129,21 @@ export default {
     onCloseConfirmModal() {
       this.showConfirmModal = false
     },
-    onPost() {
-      console.log(this.inputForm)
+    onCloseAllModal() {
+      this.showCompleteModal = false
+      this.onCloseModal()
+      this.onCloseConfirmModal()
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+    },
+    async onPost() {
+      const response = await postRepository.store(this.inputForm)
+
+      if (response.status === 200) {
+        this.completeMesagge = 'success'
+      } else {
+        this.completeMesagge = 'error'
+      }
+      this.showCompleteModal = true
     },
     onDelete(id) {
       const response = postRepository.destory(id)
