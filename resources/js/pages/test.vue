@@ -1,11 +1,8 @@
 <template>
-  <button
-      type="button"
-      class="btn btn-info btn-block my-4 text-white"
-      @click="logout"
-    >
-      ログアウト
-    </button>
+  <router-link
+    to="/posts"
+  >posts
+  </router-link>
 </template>
 
 <script>
