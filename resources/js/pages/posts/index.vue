@@ -54,7 +54,7 @@
         {{ completeMesagge }}
       </template>
       <template slot="footer">
-        <button class="btn btn-danger" @click="onCloseAllModal">
+        <button class="btn btn-danger" @click="reload">
           閉じる
         </button>
       </template>
@@ -65,8 +65,17 @@
       class="card mb-4"
       >
       <div class="card-header">
-        {{ post.title }}
-        <button class="btn btn-danger btn-sm" @click="onDelete(post.id)">削除</button>
+        <router-link
+          :to="`/posts/${post.id}`"
+          class="text-dark">
+          {{ post.title }}
+        </router-link>
+        <button
+          class="btn btn-danger btn-sm float-right"
+          @click="onDelete(post.id)"
+        >
+          削除{{ post.id }}
+        </button>
       </div>
       <div class="card-body">
         <p class="card-text">
@@ -82,8 +91,8 @@
           v-if="post.comments.length > 0"
           class="badge badge-primary">
             <router-link
-            :to="`/posts/${post.id}`"
-            class="text-white">
+              :to="`/posts/${post.id}`"
+              class="text-white">
               コメント {{ post.comments.length }}件
             </router-link>
         </span>
@@ -129,10 +138,7 @@ export default {
     onCloseConfirmModal() {
       this.showConfirmModal = false
     },
-    onCloseAllModal() {
-      this.showCompleteModal = false
-      this.onCloseModal()
-      this.onCloseConfirmModal()
+    reload() {
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
     },
     async onPost() {
@@ -145,14 +151,15 @@ export default {
       }
       this.showCompleteModal = true
     },
-    onDelete(id) {
-      const response = postRepository.destory(id)
+    async onDelete(id) {
+      const response = await postRepository.destroy(id)
 
-      if (response.status !== 200) {
-        // todo error処理
+      if (response.status === 200) {
+        this.completeMesagge = 'success'
+      } else {
+        this.completeMesagge = 'error'
       }
-
-      // todo success処理
+      this.showCompleteModal = true
     },
   },
 }

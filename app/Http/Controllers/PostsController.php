@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\BBS\Post;
 
@@ -34,6 +35,20 @@ class PostsController extends Controller
             $this->post->fill($request->all())->save();
             DB::commit();
             return response($this->post, 200);
+        } catch (\PDOException $e) {
+            DB::rollBack();
+            Log::info($e);
+        }
+    }
+
+    public function destroy(int $id)
+    {
+        DB::beginTransaction();
+        try {
+            $record = $this->post->findOrFail($id);
+            $record->delete();
+            DB::commit();
+            return $record;
         } catch (\PDOException $e) {
             DB::rollBack();
             Log::info($e);

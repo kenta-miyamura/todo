@@ -12,7 +12,7 @@ export default {
   store(params) {
     return axios.post(url, params)
   },
-  destory(id) {
-    return axios.post(url, id)
+  destroy(id) {
+    return axios.delete(`${url}/${id}`)
   },
 }
