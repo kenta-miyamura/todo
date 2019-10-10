@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import NotFound from './pages/errors/NotFound.vue'
 
 import Test from './pages/test.vue'
+import ModalTest from './pages/modalTest.vue'
 import PostsList from './pages/posts/index.vue'
 import PostsDetail from './pages/posts/detail.vue'
 import Login from './pages/Login.vue'
@@ -14,6 +15,10 @@ const routes = [
   {
     path: '/',
     component: Test,
+  },
+  {
+    path: '/modal_test',
+    component: ModalTest,
   },
   {
     path: '/posts',

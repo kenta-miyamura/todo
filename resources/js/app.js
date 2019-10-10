@@ -5,9 +5,12 @@ import 'vue-loading-overlay/dist/vue-loading.css'
 import router from './router'
 import App from './App.vue'
 
+// 定数
+import statusCode from './config/statusCode'
 // mixins
 import loader from './mixins/global/loader'
 
+Vue.prototype.$statusCode = statusCode
 Vue.use(Loading)
 Vue.mixin(loader)
 
