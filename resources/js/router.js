@@ -8,6 +8,7 @@ import ModalTest from './pages/modalTest.vue'
 import PostsList from './pages/posts/index.vue'
 import PostsDetail from './pages/posts/detail.vue'
 import Login from './pages/Login.vue'
+import UploadTest from './pages/uploader/uploadTest.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/login',
     component: Login,
+  },
+  {
+    path: '/upload_test',
+    component: UploadTest,
   },
   // 404
   {
