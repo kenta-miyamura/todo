@@ -10,8 +10,9 @@ export default {
   }),
   methods: {
     async onOpenModal() {
+      // todo:
+      // eslint-disable-next-line no-unused-vars
       const result = await this.showConfirmModal(this.$modalParams.cancelConfirm)
-      if (!result) return
     },
   },
 }
