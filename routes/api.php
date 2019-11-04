@@ -13,4 +13,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/auth/logout', 'AuthContoller@logout');
     Route::resource('posts', 'PostsController');
     Route::resource('comment', 'CommentsController');
+
+    Route::post('/upload', 'UploadController@upload');
 });
