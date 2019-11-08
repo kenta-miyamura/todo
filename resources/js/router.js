@@ -9,6 +9,7 @@ import PostsList from './pages/posts/index.vue'
 import PostsDetail from './pages/posts/detail.vue'
 import Login from './pages/Login.vue'
 import UploadTest from './pages/uploader/uploadTest.vue'
+import SelfReflection from './pages/self/SelfReflection.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,10 @@ const routes = [
   {
     path: '/upload_test',
     component: UploadTest,
+  },
+  {
+    path: '/self_reflection',
+    component: SelfReflection,
   },
   // 404
   {
