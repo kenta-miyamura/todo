@@ -10,6 +10,7 @@ import PostsDetail from './pages/posts/detail.vue'
 import Login from './pages/Login.vue'
 import UploadTest from './pages/uploader/uploadTest.vue'
 import SelfReflection from './pages/self/SelfReflection.vue'
+import Puyopuyo from './pages/puyopuyo/puyopuyo.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,10 @@ const routes = [
   {
     path: '/self_reflection',
     component: SelfReflection,
+  },
+  {
+    path: '/puyopuyo',
+    component: Puyopuyo,
   },
   // 404
   {
