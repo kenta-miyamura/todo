@@ -8,7 +8,7 @@
       <img :src="preview" alt="" height="200">
     </div>
     <div>
-      <button class="btn btn-default" @click.prevent="onSave">保存</button>
+      <button class="btn btn-default" @click="onSave">保存</button>
     </div>
   </div>
 </template>
