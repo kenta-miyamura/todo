@@ -14,6 +14,7 @@
         <Hands
           :hands="players"
           :playerName="'プレイヤー'"
+          :sum-count="calcHands(players)"
         />
       </div>
       <div class="col-4">
@@ -21,10 +22,16 @@
           :hands="dealers"
           :is-disp="isDispDealer"
           :playerName="'ディーラー'"
+          :sum-count="calcHands(dealers)"
         />
       </div>
     </div>
     <BurstModal :is-burst="isBurst" @onInit="init" />
+    <ResultModal
+      :result="result"
+      :player-count="calcHands(players)"
+      :dealer-count="calcHands(dealers)"
+      @onInit="init" />
   </div>
 </template>
 
@@ -32,12 +39,14 @@
 import ActionButtons from '../../components/blackjack/ActionButtons.vue'
 import Hands from '../../components/blackjack/Hands.vue'
 import BurstModal from '../../components/blackjack/BurstModal.vue'
+import ResultModal from '../../components/blackjack/ResultModal.vue'
 
 export default {
   components: {
     ActionButtons,
     Hands,
     BurstModal,
+    ResultModal,
   },
 
   data: () => ({
@@ -107,6 +116,7 @@ export default {
 
       this.players = []
       this.dealers = []
+      this.result = ''
 
       // 2枚ずつカードを引く
       this.playerDraw()
@@ -118,6 +128,10 @@ export default {
 
     /**
      * カードを引く
+     * todo spliceの影響で配列になっているのでオブジェクトだけを取り出したい
+     * そうなると[0]の記述不要
+     *
+     * @return {Array} [{ number, mark, isChangeColor }]
      */
     draw() {
       const randomKey = Math.floor(Math.random() * (this.cardNumber))
@@ -131,9 +145,19 @@ export default {
      * @return {Number}
      */
     calcHands(hands) {
-      return hands.reduce((sum, hand) => {
+      // Aを最後に処理出来るようにnumberを降順で並べた値渡しで合計値を計算する
+      const tempHands = Object.assign([], hands)
+      const sortedHands = tempHands.sort((a, b) => b[0].number - a[0].number)
+
+      return sortedHands.reduce((sum, hand) => {
         let { number } = hand[0]
         if (number >= 10) number = 10
+
+        // Aの処理
+        // todo マジックナンバーだらけですみません
+        if (number === 1 && sum + 11 <= 21) {
+          number = 11
+        }
 
         return sum + number
       }, 0)
@@ -142,15 +166,14 @@ export default {
     /**
      * ディーラーと勝負する
      */
-    // game() {
-    //   const playerPoint = this.calcHands(this.players)
-    //   const dealerPoint = this.calcHands(this.dealers)
+    game() {
+      const playerPoint = this.calcHands(this.players)
+      const dealerPoint = this.calcHands(this.dealers)
 
-    //   if (playerPoint > dealerPoint) {
-    //     this.result = 'win'
-    //   }
-    // },
-    game() {},
+      if (playerPoint > dealerPoint) this.result = 'win'
+      if (playerPoint < dealerPoint) this.result = 'lose'
+      if (playerPoint === dealerPoint) this.result = 'draw'
+    },
 
     /**
      * プレイヤーがカードを引く

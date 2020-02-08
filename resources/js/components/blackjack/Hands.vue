@@ -17,6 +17,9 @@
         </div>
       </div>
     </div>
+    <div v-if="isDisp">
+      <h4 class="mt-3">{{ sumCount }}</h4>
+    </div>
   </div>
 </template>
 
@@ -37,6 +40,11 @@ export default {
       type: String,
       required: true,
       default: '',
+    },
+    sumCount: {
+      type: Number,
+      required: true,
+      default: 0,
     },
   },
   computed: {
