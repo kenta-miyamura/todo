@@ -8,12 +8,12 @@
       <img :src="preview" alt="" height="200">
     </div>
     <div>
-      <button class="btn btn-default" @click="onSave">保存</button>
+      <!-- <button class="btn btn-default" @click="onSave">保存</button> -->
     </div>
   </div>
 </template>
 <script>
-import uploadRepository from '../../repositories/UploadRepository'
+// import uploadRepository from '../../repositories/UploadRepository'
 
 export default {
   data: () => ({
@@ -47,13 +47,13 @@ export default {
       this.file = file
     },
 
-    async onSave() {
-      const formData = new FormData()
-      formData.append('file', this.file)
-      const response = await uploadRepository.upload(formData)
+    // async onSave() {
+    //   const formData = new FormData()
+    //   formData.append('file', this.file)
+    //   const response = await uploadRepository.upload(formData)
 
-      console.log(response)
-    },
+    //   console.log(response)
+    // },
   },
 }
 </script>

@@ -7,7 +7,7 @@
           :key="`lines-${lineIndex}`"
           class="d-flex flex-wrap"
         >
-          <div
+          <!-- <div
             v-for="(column, columnIndex) in columnCount"
             :key="`columns-${columnIndex}`"
             class="border"
@@ -16,7 +16,7 @@
               height: '80px'
             }"
             @click="setPuyo(lineIndex, columnIndex)"
-          ></div>
+          ></div> -->
         </div>
       </div>
       <div class="col-6">
@@ -59,9 +59,9 @@ export default {
     selectPuyo(puyo) {
       this.selectedPuyo = puyo
     },
-    setPuyo(lineIndex, columnIndex) {
-      console.log(lineIndex, columnIndex)
-    },
+    // setPuyo(lineIndex, columnIndex) {
+    //   console.log(lineIndex, columnIndex)
+    // },
   },
 }
 </script>
