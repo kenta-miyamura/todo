@@ -53,9 +53,9 @@ export default {
     this.init()
   },
   methods: {
-    init() {
-      this.puyopuyos = 
-    },
+    // init() {
+    //   this.puyopuyos =
+    // },
     selectPuyo(puyo) {
       this.selectedPuyo = puyo
     },
